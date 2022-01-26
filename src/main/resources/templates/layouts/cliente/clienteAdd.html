@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>[[#{action.agregar}+' '+#{entities.clientes}]]</title>
+    </head>
+    <body>
+        <section th:fragment="clienteAdd">
+
+            <div class="modal fade" id="agregarCliente" tabindex="-1" aria-labelledby="agregarClienteLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="agregarClienteLabel" >[[#{action.agregar}+' '+#{entities.cliente}]]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form th:action="@{/cliente/save}" method="POST" th:object="${persona}" class="was-validated">
+                        <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group col-4">
+                                        <label for='tipo_id'>[[#{persona.tipo_id}]]</label>
+                                        <!--<input type='text' name='tipo_id' class="form-control" required="true" />-->
+                                        <select class="form-select" name='tipo_id' aria-label="Seleccione Opción" required="true">
+                                            <option selected disabled >Seleccione opción</option>
+                                            <span th:each="p: ${tipo_docs}">
+                                                <option th:text="${new String(p[1])}" th:value="${new Integer(p[0])}">p</option>
+                                            </span>
+                                          </select>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for='identificacion'>[[#{persona.identificacion}]]</label>
+                                        <input type='text' name='identificacion' class="form-control" required="true" />
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for='nombre1'>[[#{persona.nombre1}]]</label>
+                                        <input type='text' name='nombre1' class="form-control" required="true" />
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for='nombre2'>[[#{persona.nombre2}]]</label>
+                                        <input type='text' name='nombre2' class="form-control"/>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for='apellido1'>[[#{persona.apellido1}]]</label>
+                                        <input type='text' name='apellido1' class="form-control" required="true" />
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for='apellido2'>[[#{persona.apellido2}]]</label>
+                                        <input type='text' name='apellido2' class="form-control" required="true" />
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for='email'>[[#{persona.email}]]</label>
+                                        <input type='email' name='email' class="form-control" />
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for='telefono'>[[#{persona.telefono}]]</label>
+                                        <input type='tel' name='telefono' class="form-control" />
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <label for='ocupacion'>[[#{persona.ocupacion}]]</label>
+                                        <input type='text' name='ocupacion' class="form-control" />
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label for='direccion'>[[#{persona.direccion}]]</label>
+                                        <input type='text' name='direccion' class="form-control" />
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for='saldo'>[[#{persona.saldo}]]</label>
+                                        <input type='number' name='saldo' class="form-control" step="any" min="0"/>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for='cantidad_dias'>[[#{persona.cantidad-dias}]]</label>
+                                        <input type='number' name='cantidad_dias' class="form-control" min="0"/>
+                                    </div>
+
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type='submit' name='guardar' class="btn btn-primary">[[#{action.guardar}]]</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </body>
+</html>

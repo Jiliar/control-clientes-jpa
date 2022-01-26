@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>[[#{action.editar}+' '+#{entities.usuarios}]]</title>
+    </head>
+    <body>
+        <section th:fragment="usuarioEdit">
+
+            <form th:action="@{/usuario/save}" method="POST" th:object="${usuario}" class="was-validated">
+                <input type='hidden' name='id' th:field='*{id}'/>
+                <div id='details'>
+                    <div class="container">
+                        <div class="row">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>[[#{action.editar}+' '+#{entities.usuario}]]</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-4">
+                                            <label for='username'>[[#{usuario.username}]]</label>
+                                            <input type='text' name='username' class="form-control" required="true" th:field='*{username}' />
+                                        </div>
+                                        <div class="form-group col-4">
+                                            <label for='password'>[[#{usuario.password}]]</label>
+                                            <input type='password' name='password' class="form-control" required="true" th:field='*{password}' />
+                                        </div>
+                                        <section th:replace="layouts/usuario/buttons/buttonsEdit::buttonsEdit"></section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </section>
+    </body>
+</html>

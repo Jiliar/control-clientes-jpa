@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="layouts/template::header-principal">
+        <title>[[#{action.agregar} +' '+ #{entities.usuario}]]</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <section th:replace="layouts/usuario/usuarioEdit :: usuarioEdit"></section>
+        <footer th:replace="layouts/template::footer"></footer>
+    </body>
+</html>

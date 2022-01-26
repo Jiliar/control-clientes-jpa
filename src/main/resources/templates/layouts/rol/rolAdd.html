@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>[[#{action.agregar}+' '+#{entities.roles}]]</title>
+    </head>
+    <body>
+        <section th:fragment="rolAdd">
+
+            <div class="modal fade" id="agregarRol" tabindex="-1" aria-labelledby="agregarRolLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="agregarRolLabel" >[[#{action.agregar}+' '+#{entities.rol}]]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form th:action="@{/rol/save}" method="POST" th:object="${rol}" class="was-validated">
+                        <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label for='sys_name'>[[#{rol.sys_name}]]</label>
+                                        <input type='text' name='sys_name' class="form-control" required="true" />
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type='submit' name='guardar' class="btn btn-primary">[[#{action.guardar}]]</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </body>
+</html>

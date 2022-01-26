@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>[[#{action.editar}+' '+#{entities.roles}]]</title>
+    </head>
+    <body>
+        <section th:fragment="rolEdit">
+
+            <form th:action="@{/rol/save}" method="POST" th:object="${rol}" class="was-validated">
+                <input type='hidden' name='id' th:field='*{id}'/>
+                <div id='details'>
+                    <div class="container">
+                        <div class="row">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>[[#{action.editar}+' '+#{entities.rol}]]</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-4">
+                                            <label for='sys_name'>[[#{rol.sys_name}]]</label>
+                                            <input type='text' name='sys_name' class="form-control" required="true" th:field='*{sys_name}' />
+                                        </div>
+                                        <section th:replace="layouts/rol/buttons/buttonsEdit::buttonsEdit"></section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </section>
+    </body>
+</html>

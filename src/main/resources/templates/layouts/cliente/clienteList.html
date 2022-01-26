@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>[[#{action.listar}+' '+#{entities.clientes}]]</title>
+    </head>
+    <body>
+        <section th:fragment="clienteList" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                        <h2 class="p-2">[[#{action.listar}+' '+#{entities.clientes}]]</h2>
+
+                        <div th:if="${personas != null and !personas.empty}" class="col-md-12 p-2">
+                            <table border="1" class="table table-striped h6">
+                                <thead class="thead-dark head-table">
+                                    <tr>
+                                        <th>[[#{persona.tipo_id}]]</th>
+                                        <th>[[#{persona.identificacion}]]</th>
+                                        <th>[[#{persona.nombre1}]]</th>
+                                        <th>[[#{persona.nombre2}]]</th>
+                                        <th>[[#{persona.apellido1}]]</th>
+                                        <th>[[#{persona.apellido2}]]</th>
+                                        <th>[[#{persona.email}]]</th>
+                                        <th>[[#{persona.telefono}]]</th>
+                                        <th>[[#{persona.direccion}]]</th>
+                                        <th>[[#{persona.ocupacion}]]</th>
+                                        <th>[[#{persona.saldo}]]</th>
+                                        <th>[[#{persona.cantidad-dias}]]</th>
+                                        <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{action.editar}]]</th>
+                                        <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{action.eliminar}]]</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="body-table">
+                                    <tr th:each="p: ${personas}">
+                                        <td th:text="${p.tipo_id}"></td>
+                                        <td th:text="${p.identificacion}"></td>
+                                        <td th:text="${p.nombre1}"></td>
+                                        <td th:text="${p.nombre2}"></td>
+                                        <td th:text="${p.apellido1}"></td>
+                                        <td th:text="${p.apellido2}"></td>
+                                        <td th:text="${p.email}"></td>
+                                        <td th:text="${p.telefono}"></td>
+                                        <td th:text="${p.direccion}"></td>
+                                        <td th:text="${p.ocupacion}"></td>
+                                        <td th:text="${p.saldo}"></td>
+                                        <td th:text="${p.cantidad_dias}"></td>
+                                        <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/cliente/edit(id=${p.id})}" th:text="#{action.editar}" /></td> 
+                                        <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/cliente/delete(id=${p.id})}" th:text="#{action.eliminar}" /></td> 
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div th:if="${personas == null or personas.empty}" class="col-md-12">
+                            <span th:text="#{messages.vacia}"></span>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

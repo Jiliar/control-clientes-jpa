@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:fragment="header-principal">
+        <title>Gestión de personas</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+        <link th:href="@{/css/style.css}" rel="stylesheet" />
+        <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    </head>
+    <body>
+        <header th:fragment="header">
+            
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container">
+                  <a class="navbar-brand" th:href="@{/}" th:text="#{template.title}">Control Clientes</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" th:href="@{/}" th:text="#{template.barra-inicio}"></a>
+                        </li>
+                      <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/cliente/}" th:text="#{template.barra-opcion1}">Clientes</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/rol/}" th:text="#{template.barra-opcion2}">Roles</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/usuario/}" th:text="#{template.barra-opcion3}">Usuarios</a>
+                      </li>
+                    </ul>
+                    <ul class="navbar-nav" sec:authorize="isAuthenticated()">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-user"></i>
+                                <span th:text="#{template.barra-bienvenido}">Bienvenido</span>
+                                <span sec:authentication="name">Usuario Loggeado</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <form method="POST" th:action="@{/logout}">
+                                <a href="#" onclick="this.parentNode.submit()" class="nav-link">
+                                    <i class="fas fa-user-times"></i>[[#{action.logout}]]
+                                </a>
+                            </form>
+                        </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+              <section id="min-header" class="py-2 bg-info text-white">
+                  <div class="container">
+                      <div class="row">
+                          <div class="md-6">
+                              <h1>
+                                  <i class="fas fa-cog"></i>[[#{template.title}]]
+                              </h1>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+
+        </header>
+        <footer th:fragment="footer" class="bg-primary text-white mt-5 p-5">
+            <div class="container">
+                <div class='col'>
+                    <p class="lead text-center lang-links text-white">
+                        <a class="text-white" th:href="@{/(lang=es)}" th:text="#{template.lang-es}"></a> | 
+                        <a class="text-white" th:href="@{/(lang=en)}" th:text="#{template.lang-en}"></a>
+                        <span class="text-white"> [[#{template.footer}]] <a th:href="www.google.com" target="_blank" class="text-white">Ing Jiliar Silgado Cardona &copy;</a> </span>
+                    </p>
+                </div>
+            </div>
+           
+        </footer>
+    </body>
+</html>

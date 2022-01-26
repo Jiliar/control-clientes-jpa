@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Botones Editar</title>
+    </head>
+    <body>
+        <section th:fragment="buttonsEdit" class="py-2 mb-4 bg-light">
+            <div id="actions" class="mb-4 bg-light">
+                <div class="container ">
+                    <div class="row">
+                        <div class="col-md-2 d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a th:href="@{/usuario/}" class="btn btn-light btn-block" style="width: 100% !important;">
+                                <i class="fas fa-arrow-left"></i> [[#{entities.usuarios}]]
+                            </a>
+                        </div>
+                        <div class="col-md-2 d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-success" style="width: 100% !important;">
+                             <i class="fas fa-check"></i> [[#{action.guardar}]]
+                            </button>
+                        </div>
+                        <div class="col-md-2 d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a th:href="@{/rol/delete(id=${usuario.id})}" class="btn btn-danger btn-block" style="width: 100% !important;">
+                                <i class="fas fa-trash"></i> [[#{action.eliminar}]]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

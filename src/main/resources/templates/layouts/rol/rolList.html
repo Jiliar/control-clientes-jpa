@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>[[#{action.listar}+' '+#{entities.roles}]]</title>
+    </head>
+    <body>
+        <section th:fragment="rolList" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                        <h2 class="p-2">[[#{action.listar}+' '+#{entities.roles}]]</h2>
+
+                        <div th:if="${roles != null and !roles.empty}" class="col-md-12 p-2">
+                            <table border="1" class="table table-striped h6">
+                                <thead class="thead-dark head-table">
+                                    <tr>
+                                        <th>[[#{rol.sys_name}]]</th>
+                                        <th>[[#{rol.estado}]]</th>
+                                        <th>[[#{rol.fecha_registro}]]</th>
+                                        <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{action.editar}]]</th>
+                                        <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{action.eliminar}]]</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="body-table">
+                                    <tr th:each="p: ${roles}">
+                                        <td th:text="${p.sys_name}"></td>
+                                        <td th:switch="${p.estado}">
+                                            <span th:case="1">ACTIVO</span>
+                                            <span th:case="2">INACTIVO</span>
+                                        </td>
+                                        <td th:text="${p.fecha_registro}"></td>
+                                        <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/rol/edit(id=${p.id})}" th:text="#{action.editar}" /></td> 
+                                        <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/rol/delete(id=${p.id})}" th:text="#{action.eliminar}" /></td> 
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div th:if="${roles == null or roles.empty}" class="col-md-12">
+                            <span th:text="#{messages.vacia}"></span>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

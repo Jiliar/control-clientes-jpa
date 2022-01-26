@@ -1,0 +1,91 @@
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>[[#{action.editar}+' '+#{entities.clientes}]]</title>
+    </head>
+    <body>
+        <section th:fragment="clienteEdit">
+
+            <form th:action="@{/cliente/save}" method="POST" th:object="${persona}" class="was-validated">
+                <input type='hidden' name='id' th:field='*{id}'/>
+                <div id='details'>
+                    <div class="container">
+                        <div class="row">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>[[#{action.editar}+' '+#{entities.clientes}]]</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                    <div class="form-group col-4">
+                                        <label for='tipo_id'>[[#{persona.tipo_id}]]</label>
+                                        <select class="form-select" name='tipo_id' aria-label="Seleccione Opción" required="true">
+                                            <option selected disabled >Seleccione opción</option>
+                                            <span th:each="p: ${tipo_docs}" th:with="id=${new String(p[0])}">
+                                                <span th:if="${id} == *{tipo_id}">
+                                                    <option selected="true" th:text="${new String(p[1])}" th:value="${id}">p</option>
+                                                </span>
+                                                <span th:if="${id} != *{tipo_id}">
+                                                    <option th:text="${new String(p[1])}" th:value="${id}">p</option>
+                                                </span>
+                                            </span>
+                                          </select>
+                                    </div>
+                                        <div class="form-group col-4">
+                                            <label for='identificacion'>[[#{persona.identificacion}]]</label>
+                                            <input type='text' name='identificacion' class="form-control" required="true" th:field='*{identificacion}'/>
+                                        </div>
+                                        <div class="form-group col-4">
+                                            <label for='nombre1'>[[#{persona.nombre1}]]</label>
+                                            <input type='text' name='nombre1' class="form-control" required="true" th:field='*{nombre1}'/>
+                                        </div>
+                                        <div class="form-group col-4">
+                                            <label for='nombre2'>[[#{persona.nombre2}]]</label>
+                                            <input type='text' name='nombre2' class="form-control" th:field='*{nombre2}'/>
+                                        </div>
+                                        <div class="form-group col-4">
+                                            <label for='apellido1'>[[#{persona.apellido1}]]</label>
+                                            <input type='text' name='apellido1' class="form-control" required="true" th:field='*{apellido1}'/>
+                                        </div>
+                                        <div class="form-group col-4">
+                                            <label for='apellido2'>[[#{persona.apellido2}]]</label>
+                                            <input type='text' name='apellido2' class="form-control" required="true" th:field='*{apellido2}'/>
+                                        </div>
+                                        <div class="form-group col-4">
+                                            <label for='email'>[[#{persona.email}]]</label>
+                                            <input type='email' name='email' class="form-control" th:field='*{email}'/>
+                                        </div>
+                                        <div class="form-group col-4">
+                                            <label for='telefono'>[[#{persona.telefono}]]</label>
+                                            <input type='tel' name='telefono' class="form-control" th:field='*{telefono}'/>
+                                        </div>
+
+                                        <div class="form-group col-4">
+                                            <label for='ocupacion'>[[#{persona.ocupacion}]]</label>
+                                            <input type='text' name='ocupacion' class="form-control" th:field='*{ocupacion}'/>
+                                        </div>
+                                        <div class="form-group col-12">
+                                            <label for='direccion'>[[#{persona.direccion}]]</label>
+                                            <input type='text' name='direccion' class="form-control" th:field='*{direccion}'/>
+                                        </div>
+                                        <div class="form-group col-4">
+                                            <label for='saldo'>[[#{persona.saldo}]]</label>
+                                            <input type='number' name='saldo' class="form-control" step="any" min="0" th:field='*{saldo}' />
+                                        </div>
+                                        <div class="form-group col-4">
+                                            <label for='cantidad_dias'>[[#{persona.cantidad-dias}]]</label>
+                                            <input type='number' name='cantidad_dias' class="form-control" min="0" th:field='*{cantidad_dias}'/>
+                                        </div>
+
+                                        <section th:replace="layouts/cliente/buttons/buttonsEdit::buttonsEdit"></section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </body>
+</html>

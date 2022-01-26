@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>[[#{action.listar}+' '+#{entities.clientes}]]</title>
+    </head>
+    <body>
+        <section th:fragment="clienteDashboard" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header bg-white">
+                                <h4>[[#{action.listar}+' '+#{entities.clientes}]]</h4>
+                            </div>
+                            <div class="card-body bg-white">
+                                <div th:if="${personas != null and !personas.empty}" class="col-md-12">
+                                    <table border="1" class="table table-striped">
+                                        <thead class="thead-dark text-center">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>[[#{persona.nombre}]]</th>
+                                                <th>[[#{persona.saldo}]]</th>
+                                                <th>[[#{persona.cantidad-dias}]]</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-center">
+                                            <tr th:each="p,contador: ${personas}">
+                                                <td th:text="${contador.count}"></td>
+                                                <td th:text="${p.nombre1}+' '+${p.apellido1}+' '+${p.apellido2}"></td>
+                                                <td th:text="${new java.text.DecimalFormat('$#,##0.00').format(p.saldo)}"></td>
+                                                <td th:text="${p.cantidad_dias}"></td>
+                                                <td>
+                                                    <a sec:authorized="hasRole('ROLE_ADMIN')" th:href="@{/persona/edit(id=${p.id})}" class="btn btn-primary btn-block">
+                                                        <i class="fas fa-angle-double-right"></i>[[#{action.editar}]]
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a sec:authorized="hasRole('ROLE_ADMIN')" th:href="@{delete(id=${p.id})}" class="btn btn-danger btn-block">
+                                                        <i class="fas fa-angle-double-right"></i>[[#{action.eliminar}]]
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div th:if="${personas == null or personas.empty}" class="col-md-12">
+                                    <span th:text="#{messages.vacia}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center bg-danger text-white mb-3">
+                            <div class="card-body">
+                                <h3 th:text="#{persona.saldo-total}"></h3>
+                                <h4 class="display-4">
+                                    <i class="fas fa-money-bill"></i> [[${new java.text.DecimalFormat('$#,##0.00').format(saldoTotal)}]]
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="card text-center bg-success text-white mb-3">
+                            <div class="card-body">
+                                <h3 th:text="#{persona.cantidad-total}"></h3>
+                                <h4 class="display-4">
+                                    <i class="fas fa-users"></i> [[${new java.text.DecimalFormat('#,##0').format(cantidadTotal)}]]
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="card text-center bg-warning text-white mb-3">
+                            <div class="card-body">
+                                <h3 th:text="#{persona.cantidad-dias}"></h3>
+                                <h4 class="display-4">
+                                    <i class="fas fa-users"></i> [[${new java.text.DecimalFormat('#,##0').format(promedioDias)}]]
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

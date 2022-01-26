@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="layouts/template::header-principal">
+        <title th:text="#{action.listar}"></title>
+        <meta charset="UTF-8">
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+        <link th:href="@{/css/style.css}" rel="stylesheet" />
+        <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    </head>
+    <body>
+        <header th:replace="layouts/template :: header"></header>
+        <section th:replace="layouts/cliente/buttons/buttonsAdd :: buttonsAdd"></section>
+        <section th:replace="layouts/cliente/clienteAdd :: clienteAdd"></section>
+        <section th:replace="layouts/cliente/clienteList :: clienteList"></section>
+        <footer th:replace="layouts/template::footer"></footer> 
+    </body>
+    
+</html>
